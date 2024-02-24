@@ -1,6 +1,3 @@
-import random
-
-
 def number_to_words(number):
     words = {
         '0': 'ноль',
@@ -17,15 +14,13 @@ def number_to_words(number):
     return ' '.join(words[digit] for digit in str(number))
 
 
-with open("input.txt", "w") as file:
-    for _ in range(5):
-        sequence = [random.randint(1, 9999) for _ in range(5)]
-
-        file.write(' '.join(map(str, sequence)) + '\n')
-
+with open("input.txt", "r") as file:
+    for line in file:
+        sequence = list(map(int, line.split()))
         sequence.sort()
+
         min_number = sequence[0]
 
         min_number_words = number_to_words(min_number)
-        sorted_sequence_str = ' '.join(map(str, sequence))
-        print(f'{sorted_sequence_str}: {min_number_words} - минимальное число')
+
+        print(' '.join(map(str, sequence)) + f': {min_number_words} - минимальное число')
