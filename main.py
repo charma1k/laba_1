@@ -15,12 +15,19 @@ def number_to_words(number):
     return ' '.join(words[digit] for digit in str(number))
 
 with open("input.txt", "r") as file:
-    for line in file:
-        sequence = list(map(int, line.split()))
-        sequence.sort()
+    block_size = 1024
+    while True:
+        block = file.read(block_size)
+        if not block:
+            break
         
-        min_number = sequence[0]
-        
-        min_number_words = number_to_words(min_number)
-        
-        print(' '.join(map(str, sequence)) + f': {min_number_words} - минимальное число')
+        lines = block.split("\n")
+        for line in lines:
+            sequence = list(map(int, line.split()))
+            sequence.sort()
+            
+            min_number = sequence[0]
+            
+            min_number_words = number_to_words(min_number)
+            
+            print(' '.join(map(str, sequence)) + f': {min_number_words} - минимальное число')
