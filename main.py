@@ -21,7 +21,7 @@ with open("input.txt", "r") as file:
         if not block:
             break
         
-        lines = block.split("\n")
+        lines = block.splitlines()
         for line in lines:
             sequence = list(map(int, line.split()))
             sequence.sort()
