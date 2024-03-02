@@ -16,6 +16,7 @@ def number_to_words(number):
 
 with open("input.txt", "r") as file:
     block_size = 1024
+    sequence = []
     while True:
         block = file.read(block_size)
         if not block:
@@ -23,7 +24,25 @@ with open("input.txt", "r") as file:
         
         lines = block.splitlines()
         for line in lines:
-            sequence = list(map(int, line.split()))
+            numbers = line.split()
+            for number in numbers:
+                try:
+                    num = int(number)
+                    sequence.append(num)
+                except ValueError:
+                    if sequence:
+                        sequence.sort()
+                        
+                        min_number = sequence[0]
+                        
+                        min_number_words = number_to_words(min_number)
+                        
+                        print(' '.join(map(str, sequence)) + f': {min_number_words} - минимальное число')
+                        
+                        sequence = []
+                    break
+
+        if sequence:
             sequence.sort()
             
             min_number = sequence[0]
